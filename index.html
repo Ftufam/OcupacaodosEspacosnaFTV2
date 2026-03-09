@@ -30,10 +30,8 @@
   --text3:    #94a3b8;
   --shadow-sm: 0 1px 4px rgba(10,22,40,.07);
   --shadow:    0 4px 16px rgba(10,22,40,.1);
-  --shadow-lg: 0 12px 40px rgba(10,22,40,.15);
-  --r:         10px;
+  --r: 10px;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Sora', sans-serif;
@@ -41,8 +39,6 @@ body {
   color: var(--text);
   min-height: 100vh;
 }
-
-/* ─── ANIMATED BG ──────────────────────────────── */
 body::before {
   content: '';
   position: fixed; inset: 0; z-index: -1;
@@ -52,7 +48,7 @@ body::before {
     var(--bg);
 }
 
-/* ─── HEADER ───────────────────────────────────── */
+/* ── HEADER ─────────────────────────────────── */
 .page-header {
   background: #ffffff;
   color: var(--text);
@@ -65,7 +61,6 @@ body::before {
   position: relative;
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(10,22,40,.10);
-  border-bottom: 3px solid var(--border);
 }
 .page-header::after {
   content: '';
@@ -89,7 +84,6 @@ body::before {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: none;
 }
 .header-badge {
   display: inline-block;
@@ -105,21 +99,22 @@ body::before {
   text-transform: uppercase;
 }
 
-/* ─── MAIN ─────────────────────────────────────── */
+/* ── MAIN ───────────────────────────────────── */
 .main { max-width: 1500px; margin: 0 auto; padding: 28px 20px 40px; }
 
-/* ─── TABS ─────────────────────────────────────── */
+/* ── TABS ROW ───────────────────────────────── */
 .tabs-row {
   display: flex;
+  align-items: flex-end;
   gap: 0;
+  flex-wrap: wrap;
   margin-bottom: 0;
-  position: relative;
 }
 .tab-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 30px;
+  gap: 7px;
+  padding: 12px 26px;
   border: 1.5px solid #bfdbfe;
   border-bottom: none;
   background: #dbeafe;
@@ -133,6 +128,7 @@ body::before {
   position: relative;
   bottom: -1px;
   letter-spacing: .01em;
+  text-decoration: none;
 }
 .tab-btn .tab-icon { font-size: 1.1rem; }
 .tab-btn:hover { background: #bfdbfe; border-color: var(--blue); color: #0f172a; }
@@ -152,10 +148,39 @@ body::before {
   background: linear-gradient(90deg, var(--blue), var(--sky));
 }
 
-/* ─── PANEL ─────────────────────────────────────── */
+/* Botão Avalie o Serviço */
+.btn-avalie {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  border: 1.5px solid var(--gold2);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Sora', sans-serif;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: .01em;
+  bottom: -1px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(232,162,32,.25);
+  transition: all .2s;
+}
+.btn-avalie:hover {
+  background: linear-gradient(135deg, #c8860a, var(--gold2));
+  box-shadow: 0 4px 16px rgba(232,162,32,.4);
+  transform: translateY(-1px);
+}
+.btn-avalie .btn-icon { font-size: 1rem; }
+
+/* ── PANEL ──────────────────────────────────── */
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: fadeIn .25s ease; }
-@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
 .panel-inner {
   background: var(--surface);
   border: 1.5px solid var(--border);
@@ -165,12 +190,12 @@ body::before {
   box-shadow: var(--shadow);
 }
 
-/* ─── CARDS ─────────────────────────────────────── */
+/* ── CARDS ──────────────────────────────────── */
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 .card {
   background: var(--surface);
@@ -186,40 +211,20 @@ body::before {
   overflow: hidden;
 }
 .card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 3px;
-}
+.card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
 .card-taxa::before  { background: linear-gradient(90deg, var(--blue), var(--sky)); }
 .card-ocup::before  { background: linear-gradient(90deg, var(--teal), var(--green)); }
 .card-disp::before  { background: linear-gradient(90deg, var(--gold), var(--amber)); }
 .card-esp::before   { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.card-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); }
+.card-value { font-size: 2rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+.card-taxa .card-value { color: var(--blue); }
+.card-ocup .card-value { color: var(--teal); }
+.card-disp .card-value { color: var(--gold2); }
+.card-esp  .card-value { color: #7c3aed; }
+.card-sub  { font-size: .7rem; color: var(--text3); }
 
-.card-label {
-  font-size: .7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  color: var(--text3);
-}
-.card-value {
-  font-size: 2rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-.card-taxa  .card-value { color: var(--blue); }
-.card-ocup  .card-value { color: var(--teal); }
-.card-disp  .card-value { color: var(--gold2); }
-.card-esp   .card-value { color: #7c3aed; }
-.card-sub {
-  font-size: .7rem;
-  color: var(--text3);
-  font-weight: 400;
-}
-
-/* ─── PROGRESS BAR ──────────────────────────────── */
+/* ── PROGRESS ───────────────────────────────── */
 .progress-wrap {
   margin-bottom: 20px;
   background: var(--surface2);
@@ -230,35 +235,12 @@ body::before {
   align-items: center;
   gap: 16px;
 }
-.progress-label {
-  font-size: .75rem;
-  font-weight: 600;
-  color: var(--text2);
-  white-space: nowrap;
-}
-.progress-track {
-  flex: 1;
-  height: 8px;
-  background: var(--border);
-  border-radius: 99px;
-  overflow: hidden;
-}
-.progress-bar {
-  height: 100%;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--blue), var(--sky));
-  transition: width .6s cubic-bezier(.4,0,.2,1);
-}
-.progress-pct {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--blue);
-  min-width: 46px;
-  text-align: right;
-}
+.progress-label { font-size: .75rem; font-weight: 600; color: var(--text2); white-space: nowrap; }
+.progress-track { flex: 1; height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.progress-bar { height: 100%; border-radius: 99px; transition: width .6s cubic-bezier(.4,0,.2,1); }
+.progress-pct { font-family: 'JetBrains Mono', monospace; font-size: .8rem; font-weight: 600; color: var(--blue); min-width: 46px; text-align: right; }
 
-/* ─── TABLE ─────────────────────────────────────── */
+/* ── TABLE ──────────────────────────────────── */
 .table-wrapper {
   overflow: auto;
   max-height: 58vh;
@@ -266,13 +248,7 @@ body::before {
   border: 1.5px solid var(--border);
   box-shadow: var(--shadow-sm);
 }
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  width: max-content;
-  min-width: 100%;
-}
-/* Header row */
+table { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; }
 thead tr th {
   background: var(--navy);
   color: rgba(255,255,255,.92);
@@ -287,33 +263,16 @@ thead tr th {
   min-width: 64px;
   border-right: 1px solid rgba(255,255,255,.08);
   border-bottom: 2px solid var(--navy3);
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  position: sticky; top: 0; z-index: 2;
 }
 thead tr th:first-child {
   min-width: 148px; text-align: left; padding-left: 14px;
   position: sticky; left: 0; z-index: 3;
-  background: var(--navy);
   border-right: 2px solid rgba(255,255,255,.15);
 }
-thead tr th:nth-child(2) { /* Taxa Local */
-  background: var(--navy2);
-  color: var(--sky);
-  min-width: 72px;
-}
-thead tr th:nth-child(3) { min-width: 52px; } /* CAP */
+thead tr th:nth-child(2) { background: var(--navy2); color: var(--sky); min-width: 72px; }
+thead tr th:nth-child(3) { min-width: 52px; }
 
-/* Sub-header groups */
-.th-group {
-  background: var(--navy2) !important;
-  color: var(--sky) !important;
-  font-size: .62rem !important;
-  padding: 5px 4px !important;
-  border-top: 1px solid rgba(56,189,248,.2) !important;
-}
-
-/* Data rows */
 tbody tr td {
   padding: 6px 6px;
   text-align: center;
@@ -329,47 +288,30 @@ tbody tr td {
 tbody tr:nth-child(even) td { background: var(--surface2); }
 tbody tr:hover td { background: #e8f3fd !important; }
 
-/* Sticky first col */
 tbody tr td:first-child {
-  text-align: left; font-size: .78rem;
-  font-weight: 700; color: var(--navy);
+  text-align: left; font-size: .78rem; font-weight: 700; color: var(--navy);
   padding-left: 14px;
   position: sticky; left: 0; z-index: 1;
   border-right: 2px solid var(--border);
 }
 tbody tr:nth-child(even) td:first-child { background: var(--surface2); }
-tbody tr:nth-child(odd) td:first-child { background: var(--surface); }
+tbody tr:nth-child(odd)  td:first-child { background: var(--surface); }
 tbody tr:hover td:first-child { background: #dbeafe !important; }
 
-/* Taxa Local column */
-td.col-taxa {
-  padding: 4px 6px;
-}
+td.col-taxa { padding: 4px 6px; }
 .badge-taxa {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 3px 8px;
-  border-radius: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 3px 8px; border-radius: 20px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: .72rem;
-  font-weight: 600;
-  min-width: 54px;
+  font-size: .72rem; font-weight: 600; min-width: 54px;
 }
 .badge-taxa.low  { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
 .badge-taxa.mid  { background: #fefce8; color: #92400e; border: 1px solid #fde68a; }
 .badge-taxa.high { background: #fff7ed; color: #9a3412; border: 1px solid #fed7aa; }
 .badge-taxa.full { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
 
-/* Cap column */
-td.col-cap {
-  color: var(--text3);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: .7rem;
-  font-weight: 500;
-}
+td.col-cap { color: var(--text3); font-family: 'JetBrains Mono', monospace; font-size: .7rem; font-weight: 500; }
 
-/* Occupied cells */
 .chip {
   display: inline-block;
   background: linear-gradient(135deg, #dbeafe, #bfdbfe);
@@ -385,28 +327,19 @@ td.col-cap {
   white-space: normal;
 }
 
-/* ─── LEGEND ─────────────────────────────────────── */
+/* ── LEGEND ─────────────────────────────────── */
 .legend {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  padding: 10px 14px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 16px; padding: 10px 14px;
   background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: .7rem;
-  color: var(--text2);
+  border: 1px solid var(--border); border-radius: 8px;
+  font-size: .7rem; color: var(--text2);
 }
 .legend-title { font-weight: 700; color: var(--text); margin-right: 4px; }
 .leg { display: flex; align-items: center; gap: 5px; }
-.leg-dot {
-  width: 10px; height: 10px; border-radius: 3px;
-  display: inline-block;
-}
+.leg-dot { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
 
-/* ─── RESPONSIVE ──────────────────────────────────── */
+/* ── RESPONSIVE ─────────────────────────────── */
 @media (max-width: 1024px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
 }
@@ -414,8 +347,10 @@ td.col-cap {
   .page-header { padding: 0 16px; min-height: 80px; gap: 12px; }
   .logo-wrap img { height: 50px; }
   .header-center h1 { font-size: .95rem; }
-  .tab-btn { padding: 10px 16px; font-size: .8rem; }
+  .tab-btn { padding: 10px 14px; font-size: .8rem; }
   .tab-btn .tab-label { display: none; }
+  .btn-avalie .btn-label { display: none; }
+  .btn-avalie { padding: 10px 12px; }
   .panel-inner { padding: 14px; }
   .table-wrapper { max-height: 50vh; }
 }
@@ -424,8 +359,8 @@ td.col-cap {
   .logo-wrap img { height: 40px; }
   .cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .card-value { font-size: 1.5rem; }
-  .tabs-row { gap: 0; }
-  .tab-btn { padding: 9px 10px; }
+  .tabs-row { gap: 0; flex-wrap: wrap; }
+  .btn-avalie { width: 100%; justify-content: center; border-radius: 8px; margin-left: 0; margin-top: 6px; bottom: 0; }
 }
 </style>
 </head>
@@ -458,6 +393,10 @@ td.col-cap {
       <span class="tab-icon">🌙</span>
       <span class="tab-label">Noturno</span>
     </button>
+    <a href="https://form.typeform.com/to/GSkXBO5l" target="_blank" class="btn-avalie">
+      <span class="btn-icon">⭐</span>
+      <span class="btn-label">Avalie o Serviço</span>
+    </a>
   </div>
 
   <div id="tab-Matutino"   class="tab-panel active"></div>
@@ -474,13 +413,11 @@ function taxaClass(v) {
   if (v >= 30) return 'mid';
   return 'low';
 }
-
 function barColor(v) {
   if (v >= 80) return 'linear-gradient(90deg,#ef4444,#f97316)';
   if (v >= 50) return 'linear-gradient(90deg,#f59e0b,#fbbf24)';
   return 'linear-gradient(90deg,#1d6fa4,#38bdf8)';
 }
-
 function buildPanel(turno) {
   const d = DATA[turno];
   const taxa = d.taxa_geral;
@@ -517,10 +454,7 @@ function buildPanel(turno) {
     <span class="progress-pct">${taxa}%</span>
   </div>`;
 
-  let thead = '<thead><tr>';
-  thead += '<th>LOCAL</th>';
-  thead += '<th>Taxa<br>Local</th>';
-  thead += '<th>Cap.</th>';
+  let thead = '<thead><tr><th>LOCAL</th><th>Taxa<br>Local</th><th>Cap.</th>';
   d.time_cols.forEach(col => {
     const short = col.replace('2a e 4a:','2/4').replace('3a e 5a:','3/5').replace('6a:','6a').replace(' ','');
     thead += `<th title="${col}">${short}</th>`;
@@ -531,8 +465,8 @@ function buildPanel(turno) {
   d.rows.forEach(row => {
     tbody += '<tr>';
     tbody += `<td>${row.LOCAL}</td>`;
-    const taxa_val = row['Taxa Local'];
-    tbody += `<td class="col-taxa"><span class="badge-taxa ${taxaClass(taxa_val)}">${taxa_val}%</span></td>`;
+    const tv = row['Taxa Local'];
+    tbody += `<td class="col-taxa"><span class="badge-taxa ${taxaClass(tv)}">${tv}%</span></td>`;
     tbody += `<td class="col-cap">${row.CAPMAXESP ?? ''}</td>`;
     d.time_cols.forEach(col => {
       const val = row[col] || '';
@@ -562,7 +496,6 @@ function showTab(turno, btn) {
   panel.classList.add('active');
 }
 
-// Init
 document.getElementById('tab-Matutino').innerHTML = buildPanel('Matutino');
 </script>
 </body>
